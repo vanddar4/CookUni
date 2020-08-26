@@ -5,23 +5,71 @@ class Recipe {
     }
 
     async list() {
-      // TODO
+      fetch(`https://baas.kinvey.com/appdata/${appID}/recipes`, {
+      method: "GET", 
+      body: JSON.stringify(data),
+        headers: {
+          "Authorization": "Kinvey " + authToken
+        }
+      }).then(response => {
+        console.log(response.json())
+        return response.json()
+      })
     }
 
     async shareRecipe({params}) {
-      // TODO
+      fetch(`https://baas.kinvey.com/appdata/${appID}/recipes`, {
+      method: "POST", 
+      body: JSON.stringify(data),
+        headers: {
+          "Authorization": "Kinvey " + authToken,
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      }).then(response => {
+        console.log(response.json())
+        return response.json()
+      })
     }
 
     async editRecipe({params}) {
-      // TODO
+      fetch(`https://baas.kinvey.com/appdata/${appID}/recipes/${recipeID}`, {
+      method: "PUT", 
+      body: JSON.stringify(data),
+        headers: {
+          "Authorization": "Kinvey " + authToken,
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      }).then(response => {
+        console.log(response.json())
+        return response.json()
+      })
     }
 
     async deleteRecipe({params}) {
-      // TODO
+      fetch(`https://baas.kinvey.com/appdata/${appID}/recipes/${recipeID}`, {
+      method: "DELETE", 
+      body: JSON.stringify(data),
+        headers: {
+          "Authorization": "Kinvey " + authToken
+        }
+      }).then(response => {
+        console.log(response.json())
+        return response.json()
+      })
     }
 
     async likeRecipe({params}) {
-      // TODO
+      fetch(`https://baas.kinvey.com/appdata/${appID}/recipes/${recipeID}`, {
+      method: "PUT", 
+      body: JSON.stringify(data),
+        headers: {
+          "Authorization": "Kinvey " + authToken,
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      }).then(response => {
+        console.log(response.json())
+        return response.json()
+      })
     }
 }
 
