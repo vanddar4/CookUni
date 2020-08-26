@@ -10,5 +10,6 @@ function notify(msg, type, context) {
 
     let template = Handlebars.compile(html)
     context.$element().prepend(template({msg}));
+    //console.log(context.$element().prepend("<div> hello world </div>"));
     
 }
