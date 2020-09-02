@@ -3,22 +3,22 @@ var app = Sammy('main', function() {
     let recipe = new Recipe(user) // I passed the user in the contructor so that I can check the user session
     let authenticated = false
     let navTemplate = document.querySelector('nav').innerHTML //get nav element so we can update its html later
-    //get.session()? //DVD Note to pull Id for each user during the session.
+
     const checkLoggined = (callback) => { // called by this.around() runs when the url hash changes, we can uses this to check if user is loggined or not
         let names = ''
         if(user.session) { //check if user loggined
-            console.log('Logged-In')
+            console.log('loggined')
             authenticated = true
             names = user.session.username
         } else {
-            console.log('Not Logged-In')
+            console.log('not loggined')
             authenticated = false
         }
 
         let nav = document.querySelector('nav')
         let template = Handlebars.compile(navTemplate)
         nav.innerHTML = template({authenticated, names})
-        callback() // calling callback works like continue in a loop
+        callback() // calling calback works like continue in a  loop
     }
 
     this.around(checkLoggined)
@@ -35,8 +35,7 @@ var app = Sammy('main', function() {
         // basic handlebars usage
         let src = document.getElementById(templateID).innerHTML
         let template = Handlebars.compile(src)
-        let recipes = testData
-        let html = template({authenticated, index, recipes})
+        let html = template({authenticated, index})
 
         // this.swap() works like element.innerHTML = <h1>Hello</h1>, it swaps the selected element as you can see at the top Sammy('main')
         this.swap(html)
@@ -50,7 +49,7 @@ var app = Sammy('main', function() {
     this.get('#/login', () => handleChangeView('login-template'));
     this.get('#/register', () => handleChangeView('register-template'));
 
-    this.get('#/action/user/logout', (context) => user.logout(context));
+    this.get('#/action/user/logout', () => user.logout());
 
     // post method can be called by html forms when submitted, just specify the action property in the form, you can check in the html code
     this.post('#/action/user/login', (context) => user.login(context)); // passing the context so that we can access the params object
